@@ -37,14 +37,18 @@ export default function Navbar() {
             className={`nav-link${isActive('/') ? ' nav-link-active' : ''}`}
           >Home</button>
           <button
-            onClick={() => navigate('/ai-consulting')}
-            className={`nav-link${isActive('/ai-consulting') ? ' nav-link-active' : ''}`}
-          >AI Consulting</button>
+            onClick={() => navigate('/products')}
+            className={`nav-link${isActive('/products') ? ' nav-link-active' : ''}`}
+          >Products</button>
+          <button
+            onClick={() => navigate('/dealers')}
+            className={`nav-link${isActive('/dealers') ? ' nav-link-active' : ''}`}
+          >Dealers</button>
           <button
             onClick={() => navigate('/contact')}
             className={`nav-link${isActive('/contact') ? ' nav-link-active' : ''}`}
           >Contact</button>
-          <button className="cta-btn" onClick={() => navigate('/contact')}>Get Started</button>
+          <button className="cta-btn" onClick={() => navigate('/contact')}>Dealer Inquiry</button>
         </nav>
         <button className="mobile-menu-btn">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

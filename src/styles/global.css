@@ -1534,3 +1534,509 @@ body {
     gap: 0;
   }
 }
+/* ============ MEDICAL PLATFORM REWORK ============ */
+:root {
+  --medical-panel: rgba(8, 8, 22, 0.72);
+  --medical-panel-strong: rgba(12, 12, 30, 0.9);
+  --medical-line: rgba(129, 140, 248, 0.22);
+  --medical-cyan: #67e8f9;
+  --medical-violet: #8b5cf6;
+}
+
+.header {
+  background: rgba(3, 3, 8, 0.58);
+  backdrop-filter: blur(18px);
+}
+
+.med-hero {
+  justify-content: center;
+  gap: 4rem;
+  padding-top: 5rem;
+}
+
+.med-hero-content {
+  max-width: 760px;
+  margin: 0;
+  text-align: left;
+}
+
+.med-hero-content .hero-subtitle {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.med-hero-content .hero-buttons {
+  justify-content: flex-start;
+}
+
+.medical-hero-panel {
+  width: min(440px, 100%);
+  min-height: 520px;
+  padding: 1.1rem;
+  border: 1px solid var(--medical-line);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 70% 20%, rgba(103, 232, 249, 0.16), transparent 28%),
+    linear-gradient(145deg, rgba(139, 92, 246, 0.18), rgba(3, 3, 8, 0.78));
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.45), 0 0 70px rgba(99, 102, 241, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.medical-hero-panel::before {
+  content: '';
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  background-image:
+    linear-gradient(rgba(129, 140, 248, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 140, 248, 0.07) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(180deg, #000, transparent 74%);
+}
+
+.scan-window {
+  position: relative;
+  z-index: 1;
+  min-height: 405px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+.scan-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.scan-header strong {
+  color: var(--medical-cyan);
+}
+
+.xray-film {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  top: 22%;
+  bottom: 12%;
+  border-radius: 44% 44% 24% 24%;
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(255, 255, 255, 0.22), transparent 22%),
+    radial-gradient(ellipse at 36% 50%, rgba(103, 232, 249, 0.22), transparent 25%),
+    radial-gradient(ellipse at 64% 50%, rgba(103, 232, 249, 0.22), transparent 25%),
+    linear-gradient(180deg, rgba(129, 140, 248, 0.18), rgba(3, 7, 18, 0.82));
+  box-shadow: inset 0 0 48px rgba(103, 232, 249, 0.2), 0 0 52px rgba(103, 232, 249, 0.1);
+  overflow: hidden;
+}
+
+.rib {
+  position: absolute;
+  width: 42%;
+  height: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  opacity: 0.8;
+}
+
+.rib-1 { left: 8%; top: 34%; transform: rotate(17deg); }
+.rib-2 { right: 8%; top: 34%; transform: rotate(-17deg); }
+.rib-3 { left: 10%; top: 48%; transform: rotate(10deg); }
+.rib-4 { right: 10%; top: 48%; transform: rotate(-10deg); }
+
+.scan-sweep {
+  position: absolute;
+  inset: 0;
+  height: 32%;
+  background: linear-gradient(180deg, transparent, rgba(103, 232, 249, 0.22), transparent);
+  animation: scanMove 3.5s linear infinite;
+}
+
+@keyframes scanMove {
+  from { transform: translateY(-110%); }
+  to { transform: translateY(330%); }
+}
+
+.mini-worklist {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+}
+
+.mini-worklist span,
+.modality-grid span,
+.capability-list span {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 0.72rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.compact-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.product-grid,
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.medical-product-card,
+.product-detail-card,
+.dealer-proof,
+.dealer-copy-card,
+.product-hero-strip,
+.contact-visual-card {
+  border: 1px solid var(--medical-line);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(103, 232, 249, 0.1), transparent 34%),
+    linear-gradient(145deg, rgba(139, 92, 246, 0.1), rgba(255, 255, 255, 0.025));
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16);
+}
+
+.medical-product-card,
+.product-detail-card {
+  min-height: 310px;
+  border-radius: 24px;
+  padding: 1.35rem;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.medical-product-card:hover,
+.product-detail-card:hover,
+.dealer-proof:hover {
+  transform: translateY(-8px);
+  border-color: rgba(103, 232, 249, 0.34);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28), 0 0 34px rgba(99, 102, 241, 0.12);
+}
+
+.product-badge,
+.product-identity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.product-badge img,
+.product-identity img {
+  width: 34px;
+  height: 34px;
+  filter: drop-shadow(0 0 14px rgba(139, 92, 246, 0.5));
+}
+
+.product-badge span,
+.product-identity span {
+  color: var(--medical-cyan);
+  border: 1px solid rgba(103, 232, 249, 0.24);
+  background: rgba(103, 232, 249, 0.08);
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.medical-product-card h3,
+.product-detail-card h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.45rem;
+  margin: 1.5rem 0 0.45rem;
+}
+
+.medical-product-card h4,
+.product-detail-card h3 {
+  color: var(--text);
+  font-size: 0.96rem;
+  margin-bottom: 0.8rem;
+}
+
+.medical-product-card p,
+.product-detail-card p,
+.dealer-copy-card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.split-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.split-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.dealer-copy-card {
+  border-radius: 28px;
+  padding: 2.2rem;
+}
+
+.dealer-copy-card h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  margin: 1rem 0;
+}
+
+.dealer-proof-grid,
+.modality-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.dealer-proof {
+  border-radius: 24px;
+  padding: 1.4rem;
+  min-height: 180px;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.dealer-proof span {
+  display: block;
+  width: 44px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), var(--medical-cyan));
+  margin-bottom: 3rem;
+}
+
+.dealer-proof strong,
+.workflow-step strong {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.25;
+}
+
+.dealer-proof p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin-top: 0.8rem;
+}
+
+.dealer-proof-grid-large .dealer-proof {
+  min-height: 250px;
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.workflow-step {
+  border-radius: 22px;
+  padding: 1.2rem;
+  min-height: 160px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.workflow-step span {
+  color: var(--medical-cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2.6rem;
+}
+
+.product-page-hero,
+.contact-page-hero {
+  min-height: 62vh;
+}
+
+.product-hero-strip {
+  display: grid;
+  grid-template-columns: 0.72fr 1fr;
+  gap: 1rem;
+  border-radius: 30px;
+  padding: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.product-hero-strip h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+  margin: 2rem 0 1rem;
+}
+
+.product-hero-strip p {
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.radiology-wall {
+  min-height: 320px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.film-tile {
+  border-radius: 22px;
+  border: 1px solid rgba(103, 232, 249, 0.2);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.22), transparent 12%),
+    radial-gradient(ellipse at 50% 52%, rgba(103, 232, 249, 0.2), transparent 38%),
+    linear-gradient(145deg, rgba(3, 7, 18, 0.92), rgba(15, 23, 42, 0.7));
+  box-shadow: inset 0 0 44px rgba(103, 232, 249, 0.12);
+}
+
+.film-brain {
+  grid-row: span 2;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, 0.2), transparent 20%),
+    radial-gradient(ellipse at 36% 48%, rgba(103, 232, 249, 0.18), transparent 28%),
+    radial-gradient(ellipse at 64% 48%, rgba(103, 232, 249, 0.18), transparent 28%),
+    linear-gradient(145deg, rgba(3, 7, 18, 0.94), rgba(30, 41, 59, 0.6));
+}
+
+.film-spine {
+  background:
+    linear-gradient(90deg, transparent 46%, rgba(255, 255, 255, 0.22) 48%, rgba(255, 255, 255, 0.22) 52%, transparent 54%),
+    repeating-linear-gradient(180deg, transparent 0 18px, rgba(103, 232, 249, 0.13) 19px 25px),
+    linear-gradient(145deg, rgba(3, 7, 18, 0.94), rgba(30, 41, 59, 0.6));
+}
+
+.product-detail-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.product-detail-card {
+  min-height: 360px;
+}
+
+.capability-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.modality-grid span {
+  min-height: 120px;
+  border-radius: 24px;
+  display: flex;
+  align-items: flex-end;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 70% 20%, rgba(103, 232, 249, 0.16), transparent 28%),
+    rgba(255, 255, 255, 0.035);
+}
+
+.med-contact-wrapper {
+  grid-template-columns: 0.88fr 1.12fr;
+}
+
+.med-contact-info {
+  padding: 1.2rem;
+  border-radius: 28px;
+  border: 1px solid var(--medical-line);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.contact-visual-card {
+  border-radius: 24px;
+  padding: 1.4rem;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.contact-visual-card span {
+  color: var(--medical-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.contact-visual-card strong {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.45rem;
+  line-height: 1.15;
+}
+
+.contact-form {
+  background: rgba(7, 9, 24, 0.76);
+  backdrop-filter: blur(16px);
+}
+
+@media (max-width: 1180px) {
+  .med-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .medical-hero-panel,
+  .med-hero-content {
+    width: 100%;
+    max-width: none;
+  }
+
+  .product-grid,
+  .workflow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .split-grid,
+  .product-hero-strip,
+  .med-contact-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .med-hero-content {
+    text-align: center;
+  }
+
+  .med-hero-content .hero-buttons {
+    justify-content: center;
+  }
+
+  .medical-hero-panel {
+    min-height: 440px;
+  }
+
+  .product-grid,
+  .product-detail-grid,
+  .workflow-grid,
+  .dealer-proof-grid,
+  .modality-grid,
+  .mini-worklist {
+    grid-template-columns: 1fr;
+  }
+
+  .product-hero-strip,
+  .dealer-copy-card {
+    padding: 1.2rem;
+  }
+}

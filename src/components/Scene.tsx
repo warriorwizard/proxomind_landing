@@ -1,133 +1,86 @@
-import { useRef, useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-function Particles({ count = 2500 }) {
-  const mesh = useRef<THREE.Points>(null);
-  
-  const [positions, colors] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const col = new Float32Array(count * 3);
-    
-    const color1 = new THREE.Color('#6366f1');
-    const color2 = new THREE.Color('#8b5cf6');
-    const color3 = new THREE.Color('#ec4899');
-    
-    for (let i = 0; i < count; i++) {
-      const i3 = i * 3;
-      
-      pos[i3] = (Math.random() - 0.5) * 60;
-      pos[i3 + 1] = (Math.random() - 0.5) * 60;
-      pos[i3 + 2] = (Math.random() - 0.5) * 60;
-      
-      const mix = Math.random();
-      const color = mix < 0.33 ? color1 : mix < 0.66 ? color2 : color3;
-      col[i3] = color.r;
-      col[i3 + 1] = color.g;
-      col[i3 + 2] = color.b;
-    }
-    
-    return [pos, col];
-  }, [count]);
+function ImagingRings() {
+  const group = useRef<THREE.Group>(null);
 
   useFrame((state) => {
-    if (mesh.current) {
-      mesh.current.rotation.y = state.clock.elapsedTime * 0.015;
-      mesh.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.008) * 0.05;
-    }
+    if (!group.current) return;
+    group.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.18) * 0.08;
+    group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.11) * 0.05;
   });
 
   return (
-    <points ref={mesh}>
-      <bufferGeometry>
-        <bufferAttribute args={[positions, 3]} attach="attributes-position" />
-        <bufferAttribute args={[colors, 3]} attach="attributes-color" />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.06}
-        vertexColors
-        transparent
-        opacity={0.7}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
+    <group ref={group} position={[4.5, 1.2, -8]} rotation={[0.2, -0.35, 0]}>
+      <mesh>
+        <torusGeometry args={[3.2, 0.08, 32, 160]} />
+        <meshStandardMaterial color="#8b5cf6" emissive="#3c1a78" emissiveIntensity={1.1} transparent opacity={0.7} />
+      </mesh>
+      <mesh rotation={[Math.PI / 2.6, 0, 0]}>
+        <torusGeometry args={[2.25, 0.035, 24, 140]} />
+        <meshBasicMaterial color="#06b6d4" transparent opacity={0.55} />
+      </mesh>
+      <mesh rotation={[Math.PI / 2, 0.35, 0]}>
+        <torusGeometry args={[1.35, 0.025, 24, 120]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.28} />
+      </mesh>
+      <mesh position={[0, 0, -0.05]}>
+        <circleGeometry args={[1.95, 96]} />
+        <meshBasicMaterial color="#050615" transparent opacity={0.42} side={THREE.DoubleSide} />
+      </mesh>
+    </group>
   );
 }
 
-function FloatingShapes() {
+function DicomSlices() {
   const group = useRef<THREE.Group>(null);
-  
-  const shapes = useMemo(() => {
-    return Array.from({ length: 20 }, (_, i) => ({
-      position: [
-        (Math.random() - 0.5) * 35,
-        (Math.random() - 0.5) * 25,
-        (Math.random() - 0.5) * 25 - 8,
-      ] as [number, number, number],
-      rotation: [Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI] as [number, number, number],
-      scale: Math.random() * 0.4 + 0.15,
-      type: i % 3 === 0 ? 'octahedron' : i % 3 === 1 ? 'icosahedron' : 'dodecahedron',
-      color: ['#6366f1', '#8b5cf6', '#ec4899'][i % 3],
-    }));
-  }, []);
+  const slices = useMemo(() => Array.from({ length: 10 }, (_, index) => ({
+    x: -7 + index * 0.34,
+    y: -1.8 + Math.sin(index) * 0.34,
+    z: -7 - index * 0.22,
+    opacity: 0.1 + index * 0.035,
+  })), []);
 
-  useFrame(() => {
-    if (group.current) {
-      group.current.rotation.y += 0.002;
-    }
+  useFrame((state) => {
+    if (!group.current) return;
+    group.current.position.y = Math.sin(state.clock.elapsedTime * 0.45) * 0.12;
+    group.current.rotation.y = -0.42 + Math.sin(state.clock.elapsedTime * 0.16) * 0.05;
   });
 
   return (
-    <group ref={group}>
-      {shapes.map((shape, i) => (
-        <mesh 
-          key={i} 
-          position={shape.position}
-          rotation={shape.rotation}
-          scale={shape.scale}
-        >
-          {shape.type === 'octahedron' && <octahedronGeometry />}
-          {shape.type === 'icosahedron' && <icosahedronGeometry />}
-          {shape.type === 'dodecahedron' && <dodecahedronGeometry />}
-          <meshStandardMaterial
-            color={shape.color}
-            emissive={shape.color}
-            emissiveIntensity={0.4}
-            transparent
-            opacity={0.5}
-            wireframe
-          />
+    <group ref={group} rotation={[0.1, -0.42, 0]}>
+      {slices.map((slice, index) => (
+        <mesh key={index} position={[slice.x, slice.y, slice.z]}>
+          <boxGeometry args={[2.3, 1.55, 0.025]} />
+          <meshBasicMaterial color={index % 2 ? '#818cf8' : '#06b6d4'} transparent opacity={slice.opacity} />
         </mesh>
       ))}
     </group>
   );
 }
 
-function NeuralNetwork() {
+function MedicalNetwork() {
   const group = useRef<THREE.Group>(null);
-  
   const { nodes, linePositions } = useMemo(() => {
-    const nodeData = Array.from({ length: 35 }, () => ({
+    const nodeData = Array.from({ length: 42 }, () => ({
       position: [
-        (Math.random() - 0.5) * 25,
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 15 - 5,
+        (Math.random() - 0.5) * 28,
+        (Math.random() - 0.5) * 16,
+        (Math.random() - 0.5) * 18 - 7,
       ] as [number, number, number],
-      scale: Math.random() * 0.12 + 0.04,
+      scale: Math.random() * 0.055 + 0.025,
     }));
 
     const lines: { start: [number, number, number]; end: [number, number, number] }[] = [];
-    for (let i = 0; i < nodeData.length; i++) {
-      for (let j = i + 1; j < nodeData.length; j++) {
+    for (let i = 0; i < nodeData.length; i += 1) {
+      for (let j = i + 1; j < nodeData.length; j += 1) {
         const dist = Math.sqrt(
           Math.pow(nodeData[i].position[0] - nodeData[j].position[0], 2) +
           Math.pow(nodeData[i].position[1] - nodeData[j].position[1], 2) +
           Math.pow(nodeData[i].position[2] - nodeData[j].position[2], 2)
         );
-        if (dist < 7) {
-          lines.push({ start: nodeData[i].position, end: nodeData[j].position });
-        }
+        if (dist < 5.4) lines.push({ start: nodeData[i].position, end: nodeData[j].position });
       }
     }
 
@@ -145,77 +98,25 @@ function NeuralNetwork() {
   }, []);
 
   useFrame((state) => {
-    if (group.current) {
-      group.current.rotation.y = state.clock.elapsedTime * 0.03;
-      group.current.position.y = Math.sin(state.clock.elapsedTime * 0.2) * 0.3;
-    }
+    if (!group.current) return;
+    group.current.rotation.y = state.clock.elapsedTime * 0.014;
+    group.current.position.y = Math.sin(state.clock.elapsedTime * 0.25) * 0.18;
   });
 
   return (
     <group ref={group}>
       {nodes.map((node, i) => (
-        <mesh key={`node-${i}`} position={node.position}>
+        <mesh key={i} position={node.position}>
           <sphereGeometry args={[node.scale, 12, 12]} />
-          <meshStandardMaterial
-            color="#6366f1"
-            emissive="#8b5cf6"
-            emissiveIntensity={0.6}
-          />
+          <meshStandardMaterial color="#a78bfa" emissive="#4f46e5" emissiveIntensity={0.9} />
         </mesh>
       ))}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute args={[linePositions, 3]} attach="attributes-position" />
         </bufferGeometry>
-        <lineBasicMaterial color="#6366f1" transparent opacity={0.15} />
+        <lineBasicMaterial color="#6366f1" transparent opacity={0.16} />
       </lineSegments>
-    </group>
-  );
-}
-
-function CentralSphere() {
-  const mesh = useRef<THREE.Mesh>(null);
-  const ringRef = useRef<THREE.Mesh>(null);
-  const ring2Ref = useRef<THREE.Mesh>(null);
-  
-  useFrame((state) => {
-    if (mesh.current) {
-      mesh.current.rotation.y = state.clock.elapsedTime * 0.15;
-      mesh.current.rotation.x = state.clock.elapsedTime * 0.08;
-      const scale = 1 + Math.sin(state.clock.elapsedTime * 0.5) * 0.03;
-      mesh.current.scale.set(scale, scale, scale);
-    }
-    if (ringRef.current) {
-      ringRef.current.rotation.z = state.clock.elapsedTime * 0.3;
-      ringRef.current.rotation.x = Math.PI / 3;
-    }
-    if (ring2Ref.current) {
-      ring2Ref.current.rotation.x = state.clock.elapsedTime * 0.2;
-      ring2Ref.current.rotation.z = Math.PI / 4;
-    }
-  });
-
-  return (
-    <group position={[10, 3, -8]}>
-      <mesh ref={mesh}>
-        <icosahedronGeometry args={[1.8, 1]} />
-        <meshStandardMaterial
-          color="#6366f1"
-          emissive="#8b5cf6"
-          emissiveIntensity={0.5}
-          wireframe
-          transparent
-          opacity={0.7}
-        />
-      </mesh>
-      <mesh ref={ringRef}>
-        <torusGeometry args={[3, 0.015, 12, 100]} />
-        <meshBasicMaterial color="#ec4899" transparent opacity={0.5} />
-      </mesh>
-      <mesh ref={ring2Ref}>
-        <torusGeometry args={[2.5, 0.015, 12, 100]} />
-        <meshBasicMaterial color="#6366f1" transparent opacity={0.4} />
-      </mesh>
     </group>
   );
 }
@@ -223,18 +124,15 @@ function CentralSphere() {
 function Scene() {
   return (
     <div className="canvas-container">
-      <Canvas camera={{ position: [0, 0, 28], fov: 55 }}>
+      <Canvas camera={{ position: [0, 0, 24], fov: 52 }}>
         <color attach="background" args={['#030308']} />
-        
-        <ambientLight intensity={0.15} />
-        <pointLight position={[15, 15, 10]} intensity={0.4} color="#6366f1" />
-        <pointLight position={[-15, -15, -10]} intensity={0.25} color="#ec4899" />
-        <pointLight position={[0, 20, 5]} intensity={0.2} color="#8b5cf6" />
-        
-        <Particles count={3500} />
-        <FloatingShapes />
-        <NeuralNetwork />
-        <CentralSphere />
+        <fog attach="fog" args={['#030308', 18, 48]} />
+        <ambientLight intensity={0.18} />
+        <pointLight position={[8, 8, 8]} intensity={1.1} color="#8b5cf6" />
+        <pointLight position={[-8, -6, 6]} intensity={0.8} color="#06b6d4" />
+        <MedicalNetwork />
+        <DicomSlices />
+        <ImagingRings />
       </Canvas>
     </div>
   );

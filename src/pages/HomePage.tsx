@@ -1,150 +1,171 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+const products = [
+  {
+    name: 'ProxoPACS',
+    status: 'Live',
+    title: 'Cloud PACS for imaging centers',
+    copy: 'Web-based DICOM viewing, study access, reporting workflow, and multi-site imaging support for MRI, CT, X-ray, ultrasound, and more.',
+  },
+  {
+    name: 'ProxoAI',
+    status: 'Live',
+    title: 'Medical AI agent for radiology teams',
+    copy: 'AI support for report analysis, image analysis, clinical summarization, and faster review of imaging workflows.',
+  },
+  {
+    name: 'ProxoLIMS',
+    status: 'Upcoming',
+    title: 'Lab operations layer',
+    copy: 'Planned LIMS tools for sample tracking, lab workflow coordination, diagnostics operations, and connected reporting.',
+  },
+  {
+    name: 'ProxoRIS',
+    status: 'Upcoming',
+    title: 'Radiology department workflow',
+    copy: 'Planned RIS tools for appointments, worklists, resource coordination, radiology operations, and center-level visibility.',
+  },
+  {
+    name: 'TeleReporting',
+    status: 'Coming',
+    title: 'Remote reporting network',
+    copy: 'A remote reporting workflow for diagnostic centers, radiologists, hospitals, and dealer-supported installations.',
+  },
+];
+
+const dealerPoints = [
+  'Software story for every machine installation',
+  'CloudPACS deployment and onboarding support',
+  'AI-assisted reporting workflow positioning',
+  'Upcoming LIMS, RIS, and telereporting roadmap',
+];
+
+function ProductBadge({ status }: { status: string }) {
+  return (
+    <div className="product-badge">
+      <img src="/favicon.svg" alt="" />
+      <span>{status}</span>
+    </div>
+  );
+}
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
-    <div style={{ transform: `translateY(${scrollY * 0.02}px)` }}>
-      {/* Hero */}
-      <section className="hero">
-        <div className="hero-content">
+    <div>
+      <section className="hero med-hero">
+        <div className="hero-content med-hero-content">
           <div className="hero-badge">
             <span className="hero-badge-dot" />
-            Based in India
+            Proxomind Labs medical software
           </div>
           <h1 className="hero-title">
-            We Build <span className="gradient-text">Intelligent</span> AI Solutions
+            Cloud imaging, <span className="gradient-text">medical AI</span>, and dealer-ready diagnostic workflows.
           </h1>
           <p className="hero-subtitle">
-            Delivering cutting-edge LLM and computer vision projects that transform businesses.
-            From concept to production, we turn complex AI challenges into powerful solutions.
+            We build ProxoPACS, ProxoAI, and the upcoming ProxoLIMS, ProxoRIS, and TeleReporting stack for hospitals, diagnostic centers, radiology teams, and equipment dealers.
           </p>
           <div className="hero-buttons">
-            <button onClick={() => navigate('/ai-consulting')} className="btn-primary">
-              AI Consulting
+            <button onClick={() => navigate('/products')} className="btn-primary">
+              Explore Products
             </button>
             <button onClick={() => navigate('/contact')} className="btn-secondary">
-              Contact Us
+              Book Dealer Demo
             </button>
           </div>
         </div>
-      </section>
 
-      {/* Features */}
-      <section id="features" className="section">
-        <div className="section-inner">
-          <div className="section-header">
-            <span className="section-label">What We Do</span>
-            <h2 className="section-title">Our Expertise</h2>
-            <p className="section-subtitle">
-              Deep technical skills across the AI stack, from research to production deployment
-            </p>
+        <div className="medical-hero-panel" aria-hidden="true">
+          <div className="scan-window">
+            <div className="scan-header">
+              <span>DICOM Study</span>
+              <strong>AI Review</strong>
+            </div>
+            <div className="xray-film">
+              <span className="rib rib-1" />
+              <span className="rib rib-2" />
+              <span className="rib rib-3" />
+              <span className="rib rib-4" />
+              <span className="scan-sweep" />
+            </div>
           </div>
-          <div className="features-grid">
-            <div className="feature-card large">
-              <div className="feature-icon purple">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                  <path d="M2 17l10 5 10-5"/>
-                  <path d="M2 12l10 5 10-5"/>
-                </svg>
-              </div>
-              <h3 className="feature-title">Large Language Models</h3>
-              <p className="feature-desc">
-                Custom LLM development, fine-tuning, and deployment. From chatbots to document intelligence, we build NLP solutions that understand context and deliver accurate results at scale.
-              </p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon pink">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                  <circle cx="9" cy="9" r="1" fill="white"/>
-                  <circle cx="15" cy="9" r="1" fill="white"/>
-                </svg>
-              </div>
-              <h3 className="feature-title">Computer Vision</h3>
-              <p className="feature-desc">
-                Object detection, facial recognition, image segmentation, and visual inspection with production-grade accuracy.
-              </p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon cyan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <path d="M18 20V10M12 20V4M6 20v-6"/>
-                </svg>
-              </div>
-              <h3 className="feature-title">ML Engineering</h3>
-              <p className="feature-desc">
-                End-to-end ML pipelines with MLOps best practices for reliable production systems.
-              </p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon green">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                  <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-              </div>
-              <h3 className="feature-title">AI Consulting</h3>
-              <p className="feature-desc">
-                Strategic AI roadmap development and implementation guidance.
-              </p>
-            </div>
-            <div className="feature-card large">
-              <div className="feature-icon orange">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <line x1="3" y1="9" x2="21" y2="9"/>
-                  <line x1="9" y1="21" x2="9" y2="9"/>
-                </svg>
-              </div>
-              <h3 className="feature-title">Data Analytics &amp; Predictive Modeling</h3>
-              <p className="feature-desc">
-                Transform raw data into actionable insights with predictive modeling, anomaly detection, and real-time analytics dashboards.
-              </p>
-            </div>
+          <div className="mini-worklist">
+            <span>MR Brain</span>
+            <span>CT Chest</span>
+            <span>XR Spine</span>
+            <span>US Abdomen</span>
           </div>
         </div>
       </section>
 
-      {/* Tech Stack */}
-      <section className="section">
+      <section id="products" className="section compact-section">
         <div className="section-inner">
           <div className="section-header">
-            <span className="section-label">Technologies</span>
-            <h2 className="section-title">Our Tech Stack</h2>
+            <span className="section-label">Product Family</span>
+            <h2 className="section-title">One Proxomind Labs stack for medical imaging businesses.</h2>
+            <p className="section-subtitle">
+              Not hardware sales. Software that helps imaging centers and dealers deploy modern diagnostic workflows around existing equipment.
+            </p>
           </div>
-          <div className="tech-cloud">
-            {['PyTorch', 'TensorFlow', 'Hugging Face', 'OpenCV', 'LangChain', 'OpenAI',
-              'AWS SageMaker', 'Google Vertex AI', 'Azure ML', 'Docker', 'Kubernetes', 'MLflow',
-              'FastAPI', 'CUDA', 'ONNX', 'RAG', 'Fine-tuning', 'RLHF'].map((tech) => (
-              <div key={tech} className="tech-item">{tech}</div>
+          <div className="product-grid">
+            {products.map((product) => (
+              <article className="medical-product-card" key={product.name}>
+                <ProductBadge status={product.status} />
+                <h3>{product.name}</h3>
+                <h4>{product.title}</h4>
+                <p>{product.copy}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
+      <section className="section split-section">
+        <div className="section-inner split-grid">
+          <div className="dealer-copy-card">
+            <span className="section-label">For Equipment Dealers</span>
+            <h2>Give every MRI, CT, X-ray, and ultrasound sale a stronger software layer.</h2>
+            <p>
+              Proxomind helps dealers support customers beyond hardware delivery with cloud PACS, AI analysis support, reporting workflows, and a product roadmap designed for diagnostic operations.
+            </p>
+            <button onClick={() => navigate('/contact')} className="btn-primary">Start Dealer Conversation</button>
+          </div>
+          <div className="dealer-proof-grid">
+            {dealerPoints.map((point) => (
+              <div className="dealer-proof" key={point}>
+                <span />
+                <strong>{point}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section compact-section">
+        <div className="section-inner">
+          <div className="section-header">
+            <span className="section-label">Workflow</span>
+            <h2 className="section-title">From scan acquisition to report intelligence.</h2>
+          </div>
+          <div className="workflow-grid">
+            {['Capture from modalities', 'Store studies in CloudPACS', 'Analyze with ProxoAI', 'Coordinate RIS/LIMS workflows', 'Enable telereporting'].map((step, index) => (
+              <article className="workflow-step" key={step}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{step}</strong>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="cta-section" style={{ marginBottom: '4rem' }}>
         <div className="cta-inner">
-          <h2>Ready to Start Your AI Journey?</h2>
-          <p>Let's discuss how we can help transform your business with cutting-edge AI solutions.</p>
+          <h2>Build your diagnostic software story with Proxomind.</h2>
+          <p>CloudPACS is live. ProxoAI is live. ProxoLIMS, ProxoRIS, and TeleReporting are coming next.</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button onClick={() => navigate('/ai-consulting')} className="btn-primary">
-              AI Consulting Assessment
-            </button>
-            <button onClick={() => navigate('/contact')} className="btn-secondary">
-              Contact Sales
-            </button>
+            <button onClick={() => navigate('/products')} className="btn-primary">View Platform</button>
+            <button onClick={() => navigate('/contact')} className="btn-secondary">Contact Team</button>
           </div>
         </div>
       </section>

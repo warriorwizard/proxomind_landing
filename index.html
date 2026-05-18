@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="ProxoMind - Advanced AI & Computer Vision Solutions. We deliver cutting-edge LLM and computer vision projects that transform businesses." />
+    <meta name="description" content="Proxomind Labs builds ProxoPACS, ProxoAI, and upcoming ProxoLIMS, ProxoRIS, and TeleReporting software for hospitals, diagnostic centers, radiology teams, and equipment dealers." />
     <meta name="theme-color" content="#030308" />
     
     <!-- Google Fonts -->
@@ -12,10 +12,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     
-    <title>ProxoMind - Advanced AI & Computer Vision Solutions</title>
+    <title>Proxomind Labs | Cloud PACS, Medical AI, RIS, LIMS and TeleReporting</title>
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function () {
+        var redirect = sessionStorage.getItem('proxomind-redirect');
+        if (redirect) {
+          sessionStorage.removeItem('proxomind-redirect');
+          history.replaceState(null, '', redirect);
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
