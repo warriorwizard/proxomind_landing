@@ -51,12 +51,12 @@ function ClinicalGrid() {
         <bufferGeometry>
           <bufferAttribute args={[linePositions, 3]} attach="attributes-position" />
         </bufferGeometry>
-        <lineBasicMaterial color="#6366f1" transparent opacity={0.085} />
+        <lineBasicMaterial color="#7868e6" transparent opacity={0.07} />
       </lineSegments>
       {nodes.map((node, i) => (
         <mesh key={i} position={node.position}>
           <sphereGeometry args={[node.scale, 8, 8]} />
-          <meshBasicMaterial color={i % 5 === 0 ? '#67e8f9' : '#8b5cf6'} transparent opacity={0.42} />
+          <meshBasicMaterial color={i % 5 === 0 ? '#ffffff' : '#7868e6'} transparent opacity={i % 5 === 0 ? 0.14 : 0.32} />
         </mesh>
       ))}
     </group>
@@ -75,7 +75,7 @@ function SoftScanPlane() {
   return (
     <mesh ref={mesh} position={[5.5, -0.7, -15]} rotation={[0, 0, -0.16]}>
       <planeGeometry args={[7, 10]} />
-      <meshBasicMaterial color="#67e8f9" transparent opacity={0.028} side={THREE.DoubleSide} />
+      <meshBasicMaterial color="#7868e6" transparent opacity={0.018} side={THREE.DoubleSide} />
     </mesh>
   );
 }

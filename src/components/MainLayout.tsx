@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Lenis from 'lenis';
 import Scene from './Scene';
-import ParallaxBackground from './ParallaxScene';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -26,7 +25,6 @@ export default function MainLayout() {
   return (
     <div className="app">
       <Scene />
-      <ParallaxBackground />
       <div className="content">
         <Navbar />
         <main>

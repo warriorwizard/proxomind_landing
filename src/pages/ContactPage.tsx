@@ -86,7 +86,7 @@ export default function ContactPage() {
               </div>
               <div className="contact-item">
                 <div className="contact-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7868e6" strokeWidth="2">
                     <path d="M3 5h18M3 12h18M3 19h18"/>
                     <path d="M7 5v14M17 5v14"/>
                   </svg>
