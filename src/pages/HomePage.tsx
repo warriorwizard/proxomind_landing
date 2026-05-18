@@ -35,9 +35,17 @@ const products = [
 
 const dealerPoints = [
   'Software story for every machine installation',
-  'CloudPACS deployment and onboarding support',
+  'ProxoPACS deployment and onboarding support',
   'AI-assisted reporting workflow positioning',
   'Upcoming LIMS, RIS, and telereporting roadmap',
+];
+
+const productSnapshot = [
+  ['ProxoPACS', 'Live cloud PACS'],
+  ['ProxoAI', 'Live medical AI'],
+  ['ProxoLIMS', 'Upcoming labs'],
+  ['ProxoRIS', 'Upcoming radiology ops'],
+  ['TeleReporting', 'Coming remote reads'],
 ];
 
 function ProductBadge({ status }: { status: string }) {
@@ -61,10 +69,10 @@ export default function HomePage() {
             Proxomind Labs medical software
           </div>
           <h1 className="hero-title">
-            Cloud imaging, <span className="gradient-text">medical AI</span>, and dealer-ready diagnostic workflows.
+            Medical imaging software for <span className="gradient-text">diagnostic growth</span>.
           </h1>
           <p className="hero-subtitle">
-            We build ProxoPACS, ProxoAI, and the upcoming ProxoLIMS, ProxoRIS, and TeleReporting stack for hospitals, diagnostic centers, radiology teams, and equipment dealers.
+            Proxomind Labs builds ProxoPACS, ProxoAI, and upcoming LIMS, RIS, and TeleReporting tools for diagnostic centers, hospitals, radiology teams, and equipment dealers.
           </p>
           <div className="hero-buttons">
             <button onClick={() => navigate('/products')} className="btn-primary">
@@ -76,25 +84,27 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="medical-hero-panel" aria-hidden="true">
-          <div className="scan-window">
-            <div className="scan-header">
-              <span>DICOM Study</span>
-              <strong>AI Review</strong>
-            </div>
-            <div className="xray-film">
-              <span className="rib rib-1" />
-              <span className="rib rib-2" />
-              <span className="rib rib-3" />
-              <span className="rib rib-4" />
-              <span className="scan-sweep" />
-            </div>
+        <div className="medical-hero-panel">
+          <div className="platform-panel-head">
+            <span>Proxomind Labs Platform</span>
+            <strong>Medical software only</strong>
           </div>
-          <div className="mini-worklist">
-            <span>MR Brain</span>
-            <span>CT Chest</span>
-            <span>XR Spine</span>
-            <span>US Abdomen</span>
+          <div className="hero-product-list">
+            {productSnapshot.map(([name, copy]) => (
+              <button key={name} type="button" onClick={() => navigate('/products')} className="hero-product-row">
+                <span>{name}</span>
+                <strong>{copy}</strong>
+              </button>
+            ))}
+          </div>
+          <div className="hero-imaging-card" aria-hidden="true">
+            <div className="image-toolbar">
+              <span>MRI / CT / X-Ray</span>
+              <strong>AI ready</strong>
+            </div>
+            <div className="professional-scan">
+              <span />
+            </div>
           </div>
         </div>
       </section>
@@ -149,7 +159,7 @@ export default function HomePage() {
             <h2 className="section-title">From scan acquisition to report intelligence.</h2>
           </div>
           <div className="workflow-grid">
-            {['Capture from modalities', 'Store studies in CloudPACS', 'Analyze with ProxoAI', 'Coordinate RIS/LIMS workflows', 'Enable telereporting'].map((step, index) => (
+            {['Capture from modalities', 'Store studies in ProxoPACS', 'Analyze with ProxoAI', 'Coordinate RIS/LIMS workflows', 'Enable telereporting'].map((step, index) => (
               <article className="workflow-step" key={step}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <strong>{step}</strong>
@@ -162,7 +172,7 @@ export default function HomePage() {
       <section className="cta-section" style={{ marginBottom: '4rem' }}>
         <div className="cta-inner">
           <h2>Build your diagnostic software story with Proxomind.</h2>
-          <p>CloudPACS is live. ProxoAI is live. ProxoLIMS, ProxoRIS, and TeleReporting are coming next.</p>
+          <p>ProxoPACS is live. ProxoAI is live. ProxoLIMS, ProxoRIS, and TeleReporting are coming next.</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button onClick={() => navigate('/products')} className="btn-primary">View Platform</button>
             <button onClick={() => navigate('/contact')} className="btn-secondary">Contact Team</button>

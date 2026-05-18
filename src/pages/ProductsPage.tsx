@@ -71,7 +71,7 @@ export default function ProductsPage() {
           <div className="product-hero-strip">
             <div>
               <ProductIdentity status="Live" />
-              <h2>CloudPACS + ProxoAI</h2>
+              <h2>ProxoPACS + ProxoAI</h2>
               <p>Cloud imaging workflow with report analysis, image analysis, and dealer-friendly deployment support.</p>
             </div>
             <div className="radiology-wall" aria-hidden="true">

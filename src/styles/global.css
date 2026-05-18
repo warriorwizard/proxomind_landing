@@ -2040,3 +2040,275 @@ body {
     padding: 1.2rem;
   }
 }
+
+/* ============ PROFESSIONAL POLISH PASS ============ */
+.clinical-canvas {
+  opacity: 0.48;
+}
+
+.clinical-canvas canvas {
+  pointer-events: none;
+}
+
+.content::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 22% 12%, rgba(139, 92, 246, 0.16), transparent 34%),
+    radial-gradient(circle at 80% 18%, rgba(103, 232, 249, 0.09), transparent 30%),
+    linear-gradient(180deg, rgba(3, 3, 8, 0.22), rgba(3, 3, 8, 0.92));
+}
+
+.hero {
+  min-height: auto;
+  padding-top: 9.5rem;
+  padding-bottom: 5rem;
+}
+
+.med-hero {
+  max-width: 1240px;
+  margin: 0 auto;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.hero-title {
+  font-size: clamp(2.35rem, 5vw, 4.15rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  margin-bottom: 1.1rem;
+}
+
+.page-hero .hero-title {
+  font-size: clamp(2.15rem, 4.4vw, 3.6rem);
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3.2vw, 2.55rem);
+  letter-spacing: -0.035em;
+}
+
+.hero-subtitle,
+.section-subtitle {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.med-hero-content {
+  flex: 1 1 53%;
+  max-width: 670px;
+}
+
+.medical-hero-panel {
+  flex: 0 1 460px;
+  min-height: auto;
+  padding: 1rem;
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(13, 16, 39, 0.86), rgba(7, 9, 24, 0.78)),
+    rgba(7, 9, 24, 0.84);
+}
+
+.medical-hero-panel::before {
+  display: none;
+}
+
+.platform-panel-head,
+.image-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.platform-panel-head {
+  padding: 0.2rem 0.25rem 0.9rem;
+}
+
+.platform-panel-head strong,
+.image-toolbar strong {
+  color: var(--medical-cyan);
+  font-weight: 700;
+}
+
+.hero-product-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.hero-product-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.78fr 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.92rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.hero-product-row:hover {
+  transform: translateX(4px);
+  border-color: rgba(103, 232, 249, 0.32);
+  background: rgba(103, 232, 249, 0.06);
+}
+
+.hero-product-row span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.hero-product-row strong {
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+.hero-imaging-card {
+  margin-top: 0.9rem;
+  padding: 0.95rem;
+  border-radius: 18px;
+  border: 1px solid rgba(103, 232, 249, 0.14);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.professional-scan {
+  position: relative;
+  height: 155px;
+  margin-top: 0.8rem;
+  overflow: hidden;
+  border-radius: 15px;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(255, 255, 255, 0.2), transparent 16%),
+    radial-gradient(ellipse at 42% 50%, rgba(103, 232, 249, 0.2), transparent 26%),
+    radial-gradient(ellipse at 58% 50%, rgba(103, 232, 249, 0.2), transparent 26%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(3, 7, 18, 0.92));
+}
+
+.professional-scan span {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(103, 232, 249, 0.18), transparent);
+  height: 40%;
+  animation: scanMove 4.5s linear infinite;
+}
+
+.product-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.medical-product-card,
+.product-detail-card {
+  min-height: auto;
+  border-radius: 20px;
+  padding: 1.25rem;
+  background:
+    linear-gradient(180deg, rgba(13, 16, 39, 0.76), rgba(7, 9, 24, 0.62)),
+    rgba(7, 9, 24, 0.72);
+}
+
+.medical-product-card h3,
+.product-detail-card h2 {
+  font-size: 1.25rem;
+  margin-top: 1.15rem;
+}
+
+.medical-product-card p,
+.product-detail-card p,
+.dealer-copy-card p {
+  font-size: 0.88rem;
+}
+
+.product-detail-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.product-detail-card:nth-child(1),
+.product-detail-card:nth-child(2) {
+  grid-column: span 1;
+}
+
+.product-hero-strip {
+  grid-template-columns: 0.9fr 1fr;
+  align-items: center;
+  padding: 1.1rem;
+}
+
+.product-hero-strip h2,
+.dealer-copy-card h2 {
+  font-size: clamp(1.75rem, 3.4vw, 2.8rem);
+}
+
+.radiology-wall {
+  min-height: 240px;
+}
+
+.workflow-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.workflow-step {
+  min-height: 130px;
+}
+
+.workflow-step span {
+  margin-bottom: 1.7rem;
+}
+
+.page-hero {
+  min-height: auto;
+  padding-top: 9rem;
+  padding-bottom: 3rem;
+}
+
+.page-hero-content {
+  padding-top: 0;
+}
+
+@media (max-width: 1180px) {
+  .product-detail-grid,
+  .product-grid,
+  .workflow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 7.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero-title,
+  .page-hero .hero-title {
+    font-size: clamp(2rem, 11vw, 2.85rem);
+  }
+
+  .hero-product-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .product-detail-grid,
+  .product-grid,
+  .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .professional-scan {
+    height: 130px;
+  }
+}

@@ -19,7 +19,7 @@ const dealerBenefits = [
   },
 ];
 
-const salesFlow = ['Discover center needs', 'Map modalities', 'Demo CloudPACS + ProxoAI', 'Deploy workflow', 'Expand with RIS/LIMS'];
+const salesFlow = ['Discover center needs', 'Map modalities', 'Demo ProxoPACS + ProxoAI', 'Deploy workflow', 'Expand with RIS/LIMS'];
 
 export default function DealersPage() {
   const navigate = useNavigate();
